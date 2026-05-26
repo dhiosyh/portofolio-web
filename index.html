@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DHIO.R - Engineering the Future</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#0266ff",
+                        "on-secondary-container": "#f9f7ff",
+                        "on-tertiary-fixed": "#221b00",
+                        "secondary": "#b3c5ff",
+                        "on-error": "#690005",
+                        "on-primary": "#003739",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#534600",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#002021",
+                        "on-primary-fixed-variant": "#004f52",
+                        "on-secondary-fixed-variant": "#003fa4",
+                        "secondary-fixed-dim": "#b3c5ff",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#efffff",
+                        "tertiary": "#fffaff",
+                        "outline": "#849494",
+                        "on-background": "#e5e2e1",
+                        "surface-container-highest": "#353534",
+                        "surface-tint": "#00dce3",
+                        "inverse-primary": "#00696d",
+                        "on-tertiary-container": "#736100",
+                        "on-primary-container": "#006d71",
+                        "primary-fixed": "#54f8ff",
+                        "secondary-fixed": "#dae1ff",
+                        "tertiary-fixed": "#ffe260",
+                        "on-surface-variant": "#b9caca",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-variant": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#131313",
+                        "tertiary-fixed-dim": "#e4c526",
+                        "on-tertiary": "#3a3000",
+                        "surface-container": "#201f1f",
+                        "on-secondary": "#002b75",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed": "#001849",
+                        "primary-fixed-dim": "#00dce3",
+                        "primary-container": "#00f7ff",
+                        "outline-variant": "#3a4a4a",
+                        "tertiary-container": "#ffde41",
+                        "surface-dim": "#131313",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "80px",
+                        "margin-mobile": "20px",
+                        "unit": "4px",
+                        "max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "body-md": ["Inter"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-mono": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Stylesheet -->
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body
+    class="bg-background text-on-background font-body-md antialiased min-h-screen relative overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+
+    <!-- Background Decorations -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] bg-grid-pattern opacity-50"></div>
+    <div
+        class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] pointer-events-none z-[-1]">
+    </div>
+    <div
+        class="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none z-[-1]">
+    </div>
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================== -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-outline-variant/30 flat no shadows">
+        <div
+            class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+            <a href="#hero"
+                class="font-display-xl text-headline-lg-mobile md:text-headline-lg tracking-tighter text-primary hover:opacity-80 transition-opacity duration-300">
+                DHIO.R</a>
+            <ul class="hidden md:flex gap-8 font-label-mono text-label-mono">
+                <li><a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-300 pb-1"
+                        href="#about" data-section="about">About</a></li>
+                <li><a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-300 pb-1"
+                        href="#skills" data-section="skills">Skills</a></li>
+                <li><a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-300 pb-1"
+                        href="#projects" data-section="projects">Projects</a></li>
+                <li><a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-300 pb-1"
+                        href="#experience" data-section="experience">Experience</a></li>
+                <li><a class="nav-link text-on-surface-variant hover:text-primary transition-colors duration-300 pb-1"
+                        href="#contact" data-section="contact">Contact</a></li>
+            </ul>
+            <a class="hidden md:flex font-label-mono text-label-mono text-primary outline outline-1 outline-primary px-4 py-2 rounded scale-95 active:scale-90 transition-transform hover:bg-primary/10"
+                href="#contact">Get in Touch</a>
+            <button class="md:hidden text-primary">
+                <span class="material-symbols-outlined" data-icon="menu">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+    <main class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-32 space-y-32">
+
+        <!-- HERO SECTION -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center min-h-[70vh] scroll-mt-20" id="hero">
+            <div class="col-span-1 md:col-span-7 flex flex-col items-start gap-6 relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-primary/30 bg-primary/10 font-label-mono text-label-mono text-primary">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    SYSTEM ONLINE
+                </div>
+                <h1 class="font-display-xl text-display-xl text-on-surface">Dhio Rahmansyah</h1>
+                <h2
+                    class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary max-w-2xl">
+                    Computer Engineering Student | Data Engineering &amp; Machine Learning | Robotics &amp; IoT
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-xl leading-relaxed">
+                    Engineering the Future. I aim to innovate at the intersection of hardware and software, building
+                    intelligent systems that transform complex robotics into human-centered experiences.
+                </p>
+                <div class="flex flex-wrap gap-4 mt-4">
+                    <a class="font-label-mono text-label-mono bg-gradient-to-r from-primary to-secondary text-on-primary px-8 py-4 rounded hover:shadow-[0_0_30px_rgba(0,247,255,0.3)] transition-all duration-300"
+                        href="#projects">
+                        View Projects
+                    </a>
+                    <a class="font-label-mono text-label-mono border border-primary text-primary px-8 py-4 rounded hover:bg-primary/10 transition-colors duration-300"
+                        href="#contact">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+            <div class="col-span-1 md:col-span-5 relative mt-16 md:mt-0">
+                <div class="absolute inset-0 bg-primary/20 blur-[80px] rounded-full z-0 pointer-events-none"></div>
+                <div
+                    class="relative w-full aspect-[3/4] md:aspect-square rounded-xl overflow-hidden glass-panel scanline-overlay z-10 group">
+                    <div
+                        class="absolute inset-0 bg-primary/20 mix-blend-color z-10 group-hover:bg-transparent transition-colors duration-700 pointer-events-none">
+                    </div>
+                    <img alt="Dhio Rahmansyah Portrait"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                        style="object-position: 50% 35%;"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7QgXqFdiusWDFBK8qkl2zVdf1Bg_33GLq1bBtEIkWx6q8YOEHzCWCUlleCn4W74q5LWI21TuooRq7tCEViixOfvAX6WIPORvpgMISxv209tf6d3NaAlIoxAEAT9cvtejNrswdKutRT9XfOTo9o2yC7JYdjKdtGS_AIn-LAxzjEKJ7mBugnE_AFZyux5Y74N-6Adn2zzOTFXUrfpLIuZtdDq-zHlFBVigo3Qj9rRYaKhzWnQ5K2KL7W7wcIOZ2310k79QN2FH3lHAb" />
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter scroll-mt-20" id="about">
+            <div class="col-span-1 md:col-span-4">
+                <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">01.</h3>
+                <h2 class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter">
+                    About Me</h2>
+                <div class="w-16 h-1 bg-primary mt-4"></div>
+            </div>
+            <div class="col-span-1 md:col-span-8 glass-panel p-8 md:p-12 rounded-xl">
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed text-lg">
+                    High-achieving Computer Engineering student at Brawijaya University with a strong passion for
+                    solving real-world problems through technology. I specialize in the convergence of Data Engineering,
+                    Machine Learning, and embedded IoT systems. My approach combines analytical rigor with hands-on
+                    hardware development, driven by a commitment to precision and empathy in every engineered solution.
+                </p>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="flex flex-col gap-12 scroll-mt-20" id="skills">
+            <div
+                class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant/30 pb-6">
+                <div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">02.</h3>
+                    <h2
+                        class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter">
+                        Core Technical Expertise</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Programming Card -->
+                <div class="glass-panel p-8 rounded-xl neon-glow-hover transition-all duration-500 group">
+                    <div
+                        class="w-12 h-12 rounded bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl" data-icon="terminal">terminal</span>
+                    </div>
+                    <h4 class="font-headline-lg-mobile text-2xl text-on-surface mb-4">Programming</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Python</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Pandas</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">NumPy</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Scikit-Learn</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">C/C++</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">SQL</span>
+                    </div>
+                </div>
+
+                <!-- Hardware & IoT Card -->
+                <div class="glass-panel p-8 rounded-xl neon-glow-hover transition-all duration-500 group">
+                    <div
+                        class="w-12 h-12 rounded bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl" data-icon="memory">memory</span>
+                    </div>
+                    <h4 class="font-headline-lg-mobile text-2xl text-on-surface mb-4">Hardware &amp; IoT</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">STM32</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">ESP8266/ESP32</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Arduino</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Sensor
+                            Fusion</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">PID
+                            Control</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Blynk
+                            IoT</span>
+                    </div>
+                </div>
+
+                <!-- AI & Data Card -->
+                <div class="glass-panel p-8 rounded-xl neon-glow-hover transition-all duration-500 group">
+                    <div
+                        class="w-12 h-12 rounded bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl" data-icon="psychology">psychology</span>
+                    </div>
+                    <h4 class="font-headline-lg-mobile text-2xl text-on-surface mb-4">AI &amp; Data</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Machine
+                            Learning</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">EfficientNet</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Google
+                            ML Kit</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">ETL
+                            Pipelines</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">Tableau</span>
+                        <span
+                            class="font-label-mono text-label-mono bg-primary/10 border border-primary/30 text-primary px-3 py-1.5 rounded">OpenCV</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section class="flex flex-col gap-12 scroll-mt-20" id="projects">
+            <div
+                class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant/30 pb-6">
+                <div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">03.</h3>
+                    <h2
+                        class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter">
+                        Selected Works</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Project: Autonomous Self-Balancing Robot -->
+                <div
+                    class="glass-panel rounded-xl overflow-hidden group flex flex-col neon-glow-hover transition-all duration-500">
+                    <div class="h-64 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-background/50 z-10 group-hover:bg-transparent transition-colors duration-500">
+                        </div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            src="robot-balancing.jpg"
+                            alt="Autonomous self-balancing two-wheeled robot with Arduino and motor driver on a white surface." />
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <div class="flex gap-2 mb-4">
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">Robotics</span>
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">PID
+                                Control</span>
+                        </div>
+                        <h4
+                            class="font-headline-lg-mobile text-2xl text-on-surface mb-3 group-hover:text-primary transition-colors">
+                            Autonomous Self-Balancing Robot</h4>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-1">Developed a
+                            two-wheeled self-balancing robot utilizing PID control algorithms and MPU6050 IMU sensor
+                            fusion to maintain vertical stability. Engineered high-precision motor control and
+                            programmed
+                            feedback loops to achieve a 0.5–0.7s rising time and a steady-state error of only
+                            0.44°.</p>
+                        <button
+                            class="view-details-btn inline-flex items-center gap-2 font-label-mono text-label-mono text-primary hover:text-secondary transition-colors w-max cursor-pointer bg-transparent border-none p-0"
+                            data-project="self-balancing-robot">
+                            View Details <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project: Autonomous SAR Robot -->
+                <div
+                    class="glass-panel rounded-xl overflow-hidden group flex flex-col neon-glow-hover transition-all duration-500">
+                    <div class="h-64 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-background/50 z-10 group-hover:bg-transparent transition-colors duration-500">
+                        </div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            style="object-position: center;" src="robot-sar.jpg"
+                            alt="Autonomous SAR hexapod robot with Dynamixel servo motors and Raspberry Pi on a lab desk." />
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <div class="flex gap-2 mb-4">
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">Robotics</span>
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">Sensor
+                                Fusion</span>
+                        </div>
+                        <h4
+                            class="font-headline-lg-mobile text-2xl text-on-surface mb-3 group-hover:text-primary transition-colors">
+                            Autonomous SAR Robot</h4>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-1">Led a team to design
+                            and program an autonomous Search and Rescue robot. Implemented complex sensor fusion
+                            algorithms achieving an 85% success rate in autonomous navigation through obstacle-dense
+                            terrain.</p>
+                        <button
+                            class="view-details-btn inline-flex items-center gap-2 font-label-mono text-label-mono text-primary hover:text-secondary transition-colors w-max cursor-pointer bg-transparent border-none p-0"
+                            data-project="sar-robot">
+                            View Details <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project: Mobile Classroom Sign Recognition -->
+                <div
+                    class="glass-panel rounded-xl overflow-hidden group flex flex-col neon-glow-hover transition-all duration-500">
+                    <div class="h-64 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-background/50 z-10 group-hover:bg-transparent transition-colors duration-500">
+                        </div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            src="comvis.png"
+                            alt="Mobile classroom sign recognition app displaying real-time computer vision results." />
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <div class="flex gap-2 mb-4">
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">Android</span>
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">Computer
+                                Vision</span>
+                        </div>
+                        <h4
+                            class="font-headline-lg-mobile text-2xl text-on-surface mb-3 group-hover:text-primary transition-colors">
+                            Mobile Classroom Sign Recognition</h4>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-1">Engineered an Android
+                            application utilizing Google ML Kit and an EfficientNet model to perform real-time optical
+                            character and sign recognition for campus navigation assistance.</p>
+                        <button
+                            class="view-details-btn inline-flex items-center gap-2 font-label-mono text-label-mono text-primary hover:text-secondary transition-colors w-max cursor-pointer bg-transparent border-none p-0"
+                            data-project="sign-recognition">
+                            View Details <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project: IoT-Based Auto Pet Feeder -->
+                <div
+                    class="glass-panel rounded-xl overflow-hidden group flex flex-col neon-glow-hover transition-all duration-500">
+                    <div class="h-64 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-background/50 z-10 group-hover:bg-transparent transition-colors duration-500">
+                        </div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            src="autopet.jpg"
+                            alt="IoT-based automatic pet feeder device with ESP8266 and load cell weight sensor." />
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <div class="flex gap-2 mb-4">
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">IoT</span>
+                            <span
+                                class="font-label-mono text-[10px] bg-primary/10 border border-primary/30 text-primary px-2 py-1 rounded">ESP8266</span>
+                        </div>
+                        <h4
+                            class="font-headline-lg-mobile text-2xl text-on-surface mb-3 group-hover:text-primary transition-colors">
+                            IoT-Based Auto Pet Feeder</h4>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-1">Architected an
+                            end-to-end IoT solution using ESP8266 and HX711 load cells, enabling remote feeding and
+                            real-time monitoring via the Blynk platform. Calibrated precision sensors to ensure 98%
+                            weight-based food dispensing accuracy while optimizing power consumption with
+                            WIFI_LIGHT_SLEEP mode.</p>
+                        <button
+                            class="view-details-btn inline-flex items-center gap-2 font-label-mono text-label-mono text-primary hover:text-secondary transition-colors w-max cursor-pointer bg-transparent border-none p-0"
+                            data-project="pet-feeder">
+                            View Details <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section class="flex flex-col gap-12 scroll-mt-20" id="experience">
+            <div
+                class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant/30 pb-6">
+                <div>
+                    <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">04.</h3>
+                    <h2
+                        class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter">
+                        Experience &amp; Education</h2>
+                </div>
+            </div>
+            <div class="relative border-l border-outline-variant/30 ml-4 md:ml-6 pl-8 space-y-12 py-4">
+
+                <!-- Experience: Vice Head of R&D -->
+                <div class="relative group">
+                    <div
+                        class="absolute -left-[41px] md:-left-[49px] top-1 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(0,247,255,0.8)] transition-all duration-300">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+                        <h4
+                            class="font-headline-lg-mobile text-xl text-on-surface group-hover:text-primary transition-colors">
+                            Vice Head of R&amp;D</h4>
+                        <span
+                            class="font-label-mono text-label-mono text-primary bg-primary/10 px-2 py-1 rounded w-max">Dec
+                            2024 - Dec 2025</span>
+                    </div>
+                    <h5 class="font-body-md text-body-md font-medium text-on-surface-variant mb-3">ROBOTIIK FILKOM UB
+                    </h5>
+                    <p class="font-body-md text-body-md text-outline leading-relaxed max-w-3xl">Directing research
+                        initiatives and mentoring engineering teams in developing advanced robotic platforms. Overseeing
+                        the integration of new sensor technologies and machine learning models into existing hardware
+                        ecosystems.</p>
+                </div>
+
+                <!-- Experience: Vice Chairman -->
+                <div class="relative group">
+                    <div
+                        class="absolute -left-[41px] md:-left-[49px] top-1 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(0,247,255,0.8)] transition-all duration-300">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+                        <h4
+                            class="font-headline-lg-mobile text-xl text-on-surface group-hover:text-primary transition-colors">
+                            Vice Chairman</h4>
+                        <span
+                            class="font-label-mono text-label-mono text-primary bg-primary/10 px-2 py-1 rounded w-max">Oct
+                            2024 - Jan 2025</span>
+                    </div>
+                    <h5 class="font-body-md text-body-md font-medium text-on-surface-variant mb-3">ROBIN 2024</h5>
+                    <p class="font-body-md text-body-md text-outline leading-relaxed max-w-3xl">Co-led the organization
+                        of a major robotics exhibition and competition. Managed technical logistics, team coordination,
+                        and system stability for event-critical infrastructure.</p>
+                </div>
+
+                <!-- Experience: IT Support LMS -->
+                <div class="relative group">
+                    <div
+                        class="absolute -left-[41px] md:-left-[49px] top-1 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(0,247,255,0.8)] transition-all duration-300">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+                        <h4
+                            class="font-headline-lg-mobile text-xl text-on-surface group-hover:text-primary transition-colors">
+                            IT Support LMS</h4>
+                        <span
+                            class="font-label-mono text-label-mono text-primary bg-primary/10 px-2 py-1 rounded w-max">Sep
+                            2024 - Jan 2025</span>
+                    </div>
+                    <h5 class="font-body-md text-body-md font-medium text-on-surface-variant mb-3">Brawijaya University
+                    </h5>
+                    <p class="font-body-md text-body-md text-outline leading-relaxed max-w-3xl">Provided technical
+                        administration and troubleshooting for the university's Learning Management System, ensuring
+                        99.9% uptime and supporting faculty with digital classroom integration.</p>
+                </div>
+
+                <!-- Education: Computer Engineering Student -->
+                <div class="relative group pt-8 border-t border-outline-variant/20">
+                    <div
+                        class="absolute -left-[41px] md:-left-[49px] top-9 w-4 h-4 rounded-full bg-background border-2 border-primary group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(0,247,255,0.8)] transition-all duration-300">
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 mb-2">
+                        <h4
+                            class="font-headline-lg-mobile text-xl text-on-surface group-hover:text-primary transition-colors">
+                            Computer Engineering Student</h4>
+                        <span
+                            class="font-label-mono text-label-mono text-primary bg-primary/10 px-2 py-1 rounded w-max">2023
+                            - Present</span>
+                    </div>
+                    <h5 class="font-body-md text-body-md font-medium text-on-surface-variant mb-3">Brawijaya University
+                    </h5>
+                    <p class="font-body-md text-body-md text-outline leading-relaxed max-w-3xl">Current Cumulative GPA:
+                        <strong class="text-primary font-label-mono">3.79</strong>. Focusing on embedded systems,
+                        hardware architecture, and intelligent control algorithms.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         FOOTER / CONTACT SECTION
+    ========================================== -->
+    <footer
+        class="w-full py-16 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 flat mt-24 relative overflow-hidden"
+        id="contact">
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(0,247,255,0.05),transparent_50%)] pointer-events-none">
+        </div>
+        <div
+            class="flex flex-col md:flex-row justify-between items-center gap-12 max-w-max-width mx-auto relative z-10">
+            <div class="flex flex-col gap-6 md:w-1/2">
+                <div class="font-display-xl text-headline-lg-mobile text-primary tracking-tighter">DHIO.R</div>
+                <blockquote
+                    class="font-headline-lg-mobile text-2xl text-on-surface-variant border-l-2 border-primary pl-6 italic">
+                    "Complexity is not a barrier; it is the ultimate challenge for innovation."
+                </blockquote>
+            </div>
+            <div class="flex flex-col items-center md:items-end gap-6 md:w-1/2 w-full">
+                <a class="font-label-mono text-label-mono text-xl text-primary hover:text-secondary-fixed-dim transition-colors flex items-center gap-3 group"
+                    href="mailto:dhiosyh@gmail.com">
+                    dhiosyh@gmail.com <span
+                        class="material-symbols-outlined group-hover:translate-x-1 transition-transform"
+                        data-icon="north_east">north_east</span>
+                </a>
+                <div class="flex gap-8 mt-4">
+                    <a class="font-body-md text-body-md text-on-surface-variant opacity-80 hover:opacity-100 hover:text-secondary-fixed-dim transition-all"
+                        href="https://linkedin.com/in/dhiorahmansyah" target="_blank">LinkedIn</a>
+                    <a class="font-body-md text-body-md text-on-surface-variant opacity-80 hover:opacity-100 hover:text-secondary-fixed-dim transition-all"
+                        href="https://github.com/dhiosyh" target="_blank">GitHub</a>
+                    <a class="font-body-md text-body-md text-on-surface-variant opacity-80 hover:opacity-100 hover:text-secondary-fixed-dim transition-all"
+                        href="https://www.instagram.com/dhiosyh/" target="_blank"
+                        rel="noopener noreferrer">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-max-width mx-auto mt-16 pt-8 border-t border-outline-variant/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+            <span class="font-body-md text-body-md text-outline-variant text-sm">© 2024 Dhio Rahmansyah. Built for the
+                future.</span>
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-primary/50 animate-ping"></span>
+                <span class="font-label-mono text-label-mono text-outline-variant text-[10px]">ALL SYSTEMS
+                    NOMINAL</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================
+         PROJECT DETAILS MODAL
+    ========================================== -->
+    <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-panel glass-panel">
+
+            <!-- Close Button -->
+            <button id="modal-close" class="modal-close-btn" aria-label="Close modal">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+
+            <!-- Tags -->
+            <div id="modal-tags" class="flex flex-wrap gap-2 mb-6"></div>
+
+            <!-- Title -->
+            <h2 id="modal-title"
+                class="font-display-xl text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4 tracking-tighter">
+            </h2>
+
+            <!-- Description -->
+            <p id="modal-description" class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8">
+            </p>
+
+            <!-- Divider -->
+            <div class="w-full h-px bg-outline-variant/30 mb-8"></div>
+
+            <!-- Footer: GitHub Link + tech stack -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <a id="modal-github" href="https://github.com/dhiosyh" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 font-label-mono text-label-mono text-primary hover:text-secondary transition-colors">
+                    <span class="material-symbols-outlined text-base">open_in_new</span>
+                    View on GitHub
+                </a>
+                <div id="modal-tech" class="flex flex-wrap gap-2"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
