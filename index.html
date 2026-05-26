@@ -145,10 +145,26 @@
             </ul>
             <a class="hidden md:flex font-label-mono text-label-mono text-primary outline outline-1 outline-primary px-4 py-2 rounded scale-95 active:scale-90 transition-transform hover:bg-primary/10"
                 href="#contact">Get in Touch</a>
-            <button class="md:hidden text-primary">
+            <button id="hamburger-btn" class="md:hidden text-primary p-1" aria-label="Open navigation menu" aria-expanded="false">
                 <span class="material-symbols-outlined" data-icon="menu">menu</span>
             </button>
         </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-nav"
+            class="mobile-nav-drawer md:hidden flex-col gap-6 px-margin-mobile py-6 border-t border-outline-variant/30 bg-background/95 backdrop-blur-md">
+            <a class="mobile-nav-link font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-300 py-2 border-b border-outline-variant/10"
+                href="#about">About</a>
+            <a class="mobile-nav-link font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-300 py-2 border-b border-outline-variant/10"
+                href="#skills">Skills</a>
+            <a class="mobile-nav-link font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-300 py-2 border-b border-outline-variant/10"
+                href="#projects">Projects</a>
+            <a class="mobile-nav-link font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-300 py-2 border-b border-outline-variant/10"
+                href="#experience">Experience</a>
+            <a class="mobile-nav-link font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-300 py-2"
+                href="#contact">Contact</a>
+        </div>
+
     </nav>
 
     <!-- =========================================
@@ -164,7 +180,7 @@
                     <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                     SYSTEM ONLINE
                 </div>
-                <h1 class="font-display-xl text-display-xl text-on-surface">Dhio Rahmansyah</h1>
+                <h1 class="font-display-xl text-on-surface" style="font-size: clamp(2rem, 8vw, 4.5rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700;">Dhio Rahmansyah</h1>
                 <h2
                     class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary max-w-2xl">
                     Computer Engineering Student | Data Engineering &amp; Machine Learning | Robotics &amp; IoT
