@@ -52,6 +52,38 @@
     border-bottom: 2px solid #efffff;
 }
 
+/* ── MOBILE NAVIGATION DRAWER ────────────────────── */
+
+/* Drawer hidden by default; shown via JS toggle */
+.mobile-nav-drawer {
+    display: none;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease;
+    max-height: 0;
+    opacity: 0;
+}
+
+.mobile-nav-drawer.is-open {
+    display: flex;
+    max-height: 400px;
+    opacity: 1;
+}
+
+/* Hamburger icon rotation when menu is open */
+#hamburger-btn.is-open .material-symbols-outlined::before {
+    content: 'close';
+}
+
+/* ── RESPONSIVE HERO TITLE SAFETY NET ───────────── */
+@media (max-width: 480px) {
+    /* Catch-all for very small screens just in case clamp() isn't enough */
+    h1 {
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+}
+
 /* ── PROJECT DETAILS MODAL ────────────────────────── */
 
 /* Dark overlay that covers the whole screen */
