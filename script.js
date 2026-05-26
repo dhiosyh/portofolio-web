@@ -15,6 +15,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
+// ── 2. HAMBURGER / MOBILE NAV TOGGLE ─────────────────
+// Opens and closes the mobile navigation drawer when the
+// hamburger button is clicked. Also closes it when any
+// link inside the drawer is tapped.
+
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileNav    = document.getElementById('mobile-nav');
+const menuIcon     = hamburgerBtn ? hamburgerBtn.querySelector('.material-symbols-outlined') : null;
+
+/** Toggle the mobile drawer open / closed. */
+function toggleMobileNav(forceClose = false) {
+    const isOpen = mobileNav.classList.contains('is-open');
+    if (forceClose || isOpen) {
+        mobileNav.classList.remove('is-open');
+        hamburgerBtn.classList.remove('is-open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        if (menuIcon) menuIcon.textContent = 'menu';
+    } else {
+        mobileNav.classList.add('is-open');
+        hamburgerBtn.classList.add('is-open');
+        hamburgerBtn.setAttribute('aria-expanded', 'true');
+        if (menuIcon) menuIcon.textContent = 'close';
+    }
+}
+
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', () => toggleMobileNav());
+}
+
+// Auto-close when a nav link inside the drawer is clicked.
+document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => toggleMobileNav(true));
+});
+
+
 // ── 2. ACTIVE NAVIGATION STATE ───────────────────────
 // Uses IntersectionObserver to detect which section is
 // currently in the viewport and highlights the matching
