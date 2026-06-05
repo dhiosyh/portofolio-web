@@ -196,3 +196,22 @@
     background: rgba(0, 247, 255, 0.2);
     border-radius: 2px;
 }
+
+/* --- Aturan Khusus untuk Export PDF --- */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Mencegah elemen terpotong di tengah halaman */
+    .card, .project-card, .skills-card, section {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* Menyembunyikan elemen web interaktif di PDF */
+    nav, header, .navbar, .mobile-menu, button {
+        display: none !important;
+    }
+}
