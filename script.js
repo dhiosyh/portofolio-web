@@ -143,28 +143,36 @@ const projectData = {
     'self-balancing-robot': {
         title: 'Autonomous Self-Balancing Robot',
         tags: ['Robotics', 'PID Control', 'Embedded'],
-        description: 'Developed a two-wheeled self-balancing robot utilizing PID control algorithms and MPU6050 IMU sensor fusion to maintain vertical stability. Engineered high-precision motor control and programmed feedback loops to achieve a 0.5–0.7s rising time and a steady-state error of only 0.44°. The system continuously reads gyroscope and accelerometer data, applies a complementary filter, and adjusts motor PWM signals in real time to keep the robot upright.',
+        why: 'Menantang pemahaman saya tentang sistem kontrol dan integrasi hardware-software dengan berupaya menjaga sistem fisik yang pada dasarnya tidak stabil agar tetap tegak seimbang.',
+        how: 'Saya bereksperimen secara intensif dengan penyetelan algoritma kontrol PID (Kp, Ki, Kd) dan fusi sensor IMU. Proses ini menuntut penyesuaian feedback loops secara terus-menerus untuk mengatasi penundaan respons motorik di dunia nyata.',
+        impact: 'Mencapai kontrol motorik presisi tinggi dengan rising time 0.5–0.7 detik dan error steady-state yang sangat stabil di angka 0.44°.',
         tech: ['C/C++', 'STM32', 'MPU6050', 'PID Control', 'Sensor Fusion', 'PWM'],
         github: 'https://github.com/dhiosyh/Autonomous-Self-Balancing-Robot',
     },
     'sar-robot': {
         title: 'Autonomous SAR Robot',
         tags: ['Robotics', 'Sensor Fusion', 'C/C++'],
-        description: 'Led a team to design, build, and program an autonomous Search and Rescue (SAR) robot for use in disaster-scenario environments. Implemented multi-sensor fusion (IMU, ultrasonic, LiDAR) with a custom PID controller, achieving an 85% success rate in autonomous navigation through obstacle-dense terrain. The robot competed at a national robotics event and placed in the top 3.',
+        why: 'Diperlukan sistem otonom yang andal untuk menavigasi medan yang tidak dapat diprediksi dan padat rintangan untuk misi pencarian dan penyelamatan (Search and Rescue).',
+        how: 'Sebagai Technical PIC, saya memimpin tim lintas disiplin beranggotakan 10+ orang. Kontribusi utama saya adalah merancang arsitektur fusi sensor yang mengintegrasikan modul MPU6050 dan Ultrasonik untuk memecahkan masalah titik buta (blind-spots) navigasi robot.',
+        impact: 'Prototipe berhasil mencapai tingkat keberhasilan misi 85% dalam simulasi rintangan skala nasional.',
         tech: ['C/C++', 'STM32', 'Sensor Fusion', 'PID Control', 'ESP32'],
         github: 'https://github.com/dhiosyh',
     },
     'sign-recognition': {
         title: 'Mobile Classroom Sign Recognition',
         tags: ['Android', 'Computer Vision', 'ML'],
-        description: 'Engineered an Android application that performs real-time optical character and classroom sign recognition to assist campus navigation. Used Google ML Kit for on-device text detection and a fine-tuned EfficientNet model for sign classification, achieving >90% accuracy in varied lighting conditions. The app includes a map overlay and voice-guided directions feature.',
+        why: 'Menciptakan antarmuka aplikasi seluler yang human-centered untuk membantu mobilitas pengguna di area kampus dengan menerjemahkan rambu fisik/papan kelas menjadi informasi digital secara instan.',
+        how: 'Saya menjembatani pengalaman pengguna (UX) seluler dengan machine learning. Prosesnya melibatkan rekayasa pipeline hybrid menggunakan OpenCV untuk pra-pemrosesan gambar (menangani berbagai kondisi pencahayaan) sebelum dimasukkan ke model EfficientNet kustom.',
+        impact: 'Menghasilkan aplikasi native dengan pengalaman pengguna yang mulus dan latensi inferensi langsung di perangkat (on-device) di bawah 500ms.',
         tech: ['Android', 'Google ML Kit', 'EfficientNet', 'OpenCV', 'Java'],
         github: 'https://github.com/dhiosyh/BoardDetection_MobileAPP',
     },
     'pet-feeder': {
         title: 'IoT-Based Auto Pet Feeder',
         tags: ['IoT', 'ESP8266', 'Embedded'],
-        description: 'Architected an end-to-end IoT solution using ESP8266 and HX711 load cells, enabling remote feeding and real-time monitoring via the Blynk platform. Calibrated precision sensors to ensure 98% weight-based food dispensing accuracy while optimizing power consumption with WIFI_LIGHT_SLEEP mode. The system supports scheduled feeding, manual override via the Blynk mobile app, and real-time weight telemetry streamed to a live dashboard.',
+        why: 'Pemilik hewan peliharaan membutuhkan solusi perawatan otomatis yang menjamin kontrol porsi makanan yang presisi dan terpantau secara real-time, bukan sekadar pengatur waktu mekanis biasa.',
+        how: 'Ini adalah proyek yang terus saya iterasi (Work-in-progress). Saya melalui proses debugging berulang pada kode ESP8266 dan melakukan kalibrasi mendalam pada sensor load cell HX711 untuk memastikan pengukuran berat tetap stabil terhadap getaran fisik perangkat.',
+        impact: 'Menghasilkan akurasi distribusi makanan sebesar 98% dengan konsumsi daya yang dioptimalkan menggunakan mode WIFI_LIGHT_SLEEP.',
         tech: ['ESP8266', 'HX711', 'Blynk IoT', 'C/C++', 'Arduino', 'Sensor Calibration'],
         github: 'https://github.com/dhiosyh/IoT-Based-Smart-Auto-Pet-Feeder',
     },
@@ -192,20 +200,36 @@ function openModal(projectId) {
     const data = projectData[projectId];
     if (!data) return;
 
-    // Populate content
+    // ── Title & tags ──────────────────────────────────
     modalTitle.textContent = data.title;
-    modalDesc.textContent = data.description;
     modalGithub.href = data.github;
 
     modalTags.innerHTML = '';
     data.tags.forEach(tag => modalTags.appendChild(makeBadge(tag)));
 
+    // ── Storytelling body ─────────────────────────────
+    modalDesc.innerHTML = `
+        <div class="modal-story-block">
+            <h3 class="modal-story-label">🔍 The Why</h3>
+            <p class="modal-story-text">${data.why}</p>
+        </div>
+        <div class="modal-story-block">
+            <h3 class="modal-story-label">⚙️ The How &amp; My Role</h3>
+            <p class="modal-story-text">${data.how}</p>
+        </div>
+        <div class="modal-story-block">
+            <h3 class="modal-story-label">🚀 The Impact</h3>
+            <p class="modal-story-text">${data.impact}</p>
+        </div>
+    `;
+
+    // ── Tech stack ────────────────────────────────────
     modalTech.innerHTML = '';
     data.tech.forEach(t => modalTech.appendChild(makeBadge(t)));
 
     // Show
     modalOverlay.classList.add('is-open');
-    document.body.style.overflow = 'hidden'; // prevent background scroll
+    document.body.style.overflow = 'hidden';
 }
 
 /** Close and reset the modal. */
