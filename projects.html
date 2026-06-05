@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>All Projects — DHIO.R</title>
+    <meta name="description" content="Complete portfolio of robotics, data engineering, and embedded systems projects by Dhio Rahmansyah." />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tailwind Configuration — identical to index.html -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#0266ff",
+                        "on-secondary-container": "#f9f7ff",
+                        "on-tertiary-fixed": "#221b00",
+                        "secondary": "#b3c5ff",
+                        "on-error": "#690005",
+                        "on-primary": "#003739",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#534600",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#002021",
+                        "on-primary-fixed-variant": "#004f52",
+                        "on-secondary-fixed-variant": "#003fa4",
+                        "secondary-fixed-dim": "#b3c5ff",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#efffff",
+                        "tertiary": "#fffaff",
+                        "outline": "#849494",
+                        "on-background": "#e5e2e1",
+                        "surface-container-highest": "#353534",
+                        "surface-tint": "#00dce3",
+                        "inverse-primary": "#00696d",
+                        "on-tertiary-container": "#736100",
+                        "on-primary-container": "#006d71",
+                        "primary-fixed": "#54f8ff",
+                        "secondary-fixed": "#dae1ff",
+                        "tertiary-fixed": "#ffe260",
+                        "on-surface-variant": "#b9caca",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-variant": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#131313",
+                        "tertiary-fixed-dim": "#e4c526",
+                        "on-tertiary": "#3a3000",
+                        "surface-container": "#201f1f",
+                        "on-secondary": "#002b75",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed": "#001849",
+                        "primary-fixed-dim": "#00dce3",
+                        "primary-container": "#00f7ff",
+                        "outline-variant": "#3a4a4a",
+                        "tertiary-container": "#ffde41",
+                        "surface-dim": "#131313",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "error": "#ffb4ab"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "body-md": ["Inter"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-xl":       ["72px",  { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg":      ["48px",  { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile":["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md":          ["16px",  { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-mono":       ["12px",  { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500" }]
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "80px",
+                        "margin-mobile": "20px",
+                        "max-width": "1280px"
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Custom Stylesheet (shared with index.html) -->
+    <link href="style.css" rel="stylesheet" />
+
+    <style>
+        /* ── Grid Pattern (identical to index.html) ────── */
+        .bg-grid-pattern {
+            background-image:
+                linear-gradient(to right,  rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* ── Glassmorphism card (extends .glass-panel) ── */
+        .project-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.06);
+            background-image: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: rgba(0,220,227,0.25);
+            box-shadow: 0 0 40px rgba(0,220,227,0.08);
+            transform: translateY(-5px);
+        }
+
+        /* ── Card thumbnail ──────────────────────────── */
+        .card-thumb {
+            position: relative;
+            height: 172px;
+            overflow: hidden;
+        }
+
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: grayscale(100%);
+            transition: filter 0.55s ease, transform 0.55s ease;
+        }
+
+        .project-card:hover .card-thumb img {
+            filter: grayscale(0%);
+            transform: scale(1.06);
+        }
+
+        .card-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(19,19,19,0.55);
+            z-index: 1;
+            transition: background 0.5s;
+        }
+
+        .project-card:hover .card-thumb-overlay {
+            background: transparent;
+        }
+
+        /* ── Badge ───────────────────────────────────── */
+        .proj-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            background: rgba(0,220,227,0.08);
+            border: 1px solid rgba(0,220,227,0.22);
+            color: #00dce3;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        /* ── Why/How/What text ───────────────────────── */
+        .card-story {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            line-height: 1.65;
+            color: #b9caca;
+        }
+
+        .card-story strong {
+            color: #00dce3;
+            font-weight: 500;
+        }
+
+        /* ── Divider ─────────────────────────────────── */
+        .card-divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(58,74,74,0.5);
+            margin: 0.75rem 0;
+        }
+
+        /* ── GitHub link ─────────────────────────────── */
+        .gh-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            color: #b9caca;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .gh-link:hover { color: #efffff; }
+
+        /* ── Responsive grid ─────────────────────────── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1100px) {
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Page fade-in ────────────────────────────── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up   { animation: fadeUp 0.55s ease both; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen relative overflow-x-hidden bg-grid-pattern">
+
+    <!-- Ambient glow blobs — identical positioning to index.html -->
+    <div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none z-[-1]"></div>
+    <div class="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none z-[-1]"></div>
+
+    <!-- ── NAVIGATION ──────────────────────────────────────── -->
+    <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/30">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1280px] mx-auto">
+            <a href="index.html"
+               class="font-display-xl text-headline-lg-mobile md:text-headline-lg tracking-tighter text-primary hover:opacity-80 transition-opacity duration-300">
+                DHIO.R
+            </a>
+            <a href="index.html"
+               class="inline-flex items-center gap-2 font-label-mono text-label-mono text-on-surface-variant hover:text-primary border border-outline-variant/40 hover:border-primary/40 px-4 py-2 rounded transition-all duration-300">
+                <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span>
+                Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <!-- ── MAIN ────────────────────────────────────────────── -->
+    <main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-24">
+
+        <!-- Header -->
+        <header class="text-center mb-16 fade-up">
+            <p class="font-label-mono text-label-mono text-on-surface-variant tracking-widest mb-4 uppercase">
+                Portfolio
+            </p>
+            <h1 class="font-display-xl text-on-surface mb-5"
+                style="font-size: clamp(2.2rem, 6vw, 4rem); line-height:1.1; letter-spacing:-0.03em; font-weight:700;">
+                All <span class="text-primary-fixed-dim">Projects</span>
+            </h1>
+            <p class="font-body-md text-on-surface-variant max-w-lg mx-auto mb-8 text-base leading-relaxed">
+                Complete portfolio of my robotics, data engineering, and embedded systems projects.
+            </p>
+            <a href="https://github.com/dhiosyh" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-3 font-label-mono text-label-mono text-primary border border-primary/30 px-8 py-4 rounded hover:bg-primary/10 hover:border-primary transition-all duration-300 group">
+                <!-- GitHub icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/>
+                </svg>
+                View All Projects on GitHub
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+            </a>
+        </header>
+
+        <!-- Projects Grid -->
+        <section class="projects-grid fade-up delay-100" aria-label="All projects">
+
+            <!-- Card 1: Epsight Metrics -->
+            <article class="project-card">
+                <div class="card-thumb">
+                    <div class="card-thumb-overlay"></div>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=80"
+                         alt="Data analytics dashboard" loading="lazy" />
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="proj-badge">Data Eng</span>
+                        <span class="proj-badge">Analytics</span>
+                    </div>
+                    <h2 class="font-headline-lg-mobile text-on-surface" style="font-size:1rem;line-height:1.3;">
+                        Epsight Metrics</h2>
+                    <p class="card-story flex-1">
+                        <strong>Why:</strong> Inspeksi dimensi manual memicu inefisiensi waktu, risiko human error, dan ketiadaan pelacakan data digital (traceability).<br>
+                        <strong>How:</strong> Merancang algoritma edge detection menggunakan Python dan OpenCV yang dijalankan secara lokal di dalam lightbox terkontrol.<br>
+                        <strong>What:</strong> Menghasilkan sistem inspeksi dengan kecepatan klasifikasi &lt; 2 detik per part, deviasi akurasi &lt; 1.0mm, dan log data real-time.
+                    </p>
+                    <div class="card-divider"></div>
+                    <a href="https://github.com/Epsight-Metrics" target="_blank" rel="noopener noreferrer" class="gh-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 2: WS S3 Auto-Remediation -->
+            <article class="project-card">
+                <div class="card-thumb">
+                    <div class="card-thumb-overlay"></div>
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80"
+                         alt="Cloud infrastructure" loading="lazy" />
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="proj-badge">Cloud</span>
+                        <span class="proj-badge">AWS</span>
+                    </div>
+                    <h2 class="font-headline-lg-mobile text-on-surface" style="font-size:1rem;line-height:1.3;">
+                        WS S3 Auto-Remediation</h2>
+                    <p class="card-story flex-1">
+                        <strong>Why:</strong> Manajemen kepatuhan dan keamanan cloud storage secara manual rentan terhadap human error.<br>
+                        <strong>How:</strong> Mengotomatiskan skrip infrastruktur cloud untuk perbaikan otomatis AWS S3.<br>
+                        <strong>What:</strong> Memastikan postur keamanan cloud yang sesuai standar tanpa intervensi manual.
+                    </p>
+                    <div class="card-divider"></div>
+                    <a href="https://github.com/dhiosyh/ws-s3-auto-remediation" target="_blank" rel="noopener noreferrer" class="gh-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 3: Autonomous SAR Robot -->
+            <article class="project-card">
+                <div class="card-thumb">
+                    <div class="card-thumb-overlay"></div>
+                    <img src="robot-sar.jpg" alt="Autonomous SAR hexapod robot" loading="lazy" />
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="proj-badge">Robotics</span>
+                        <span class="proj-badge">C/C++</span>
+                    </div>
+                    <h2 class="font-headline-lg-mobile text-on-surface" style="font-size:1rem;line-height:1.3;">
+                        Autonomous SAR Robot</h2>
+                    <p class="card-story flex-1">
+                        <strong>Why:</strong> Butuh sistem otonom andal untuk misi penyelamatan di medan yang padat rintangan.<br>
+                        <strong>How:</strong> Memimpin tim (10+ anggota) dan mengintegrasikan fusi sensor MPU6050 serta Ultrasonik.<br>
+                        <strong>What:</strong> Prototipe mencapai tingkat keberhasilan misi 85% dalam simulasi rintangan.
+                    </p>
+                    <div class="card-divider"></div>
+                    <a href="https://github.com/dhiosyh" target="_blank" rel="noopener noreferrer" class="gh-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 4: IoT-Based Auto Pet Feeder -->
+            <article class="project-card">
+                <div class="card-thumb">
+                    <div class="card-thumb-overlay"></div>
+                    <img src="autopet.jpg" alt="IoT Auto Pet Feeder" loading="lazy" />
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="proj-badge">IoT</span>
+                        <span class="proj-badge">ESP8266</span>
+                    </div>
+                    <h2 class="font-headline-lg-mobile text-on-surface" style="font-size:1rem;line-height:1.3;">
+                        IoT-Based Auto Pet Feeder</h2>
+                    <p class="card-story flex-1">
+                        <strong>Why:</strong> Membutuhkan kontrol porsi makanan hewan yang presisi dan terpantau real-time.<br>
+                        <strong>How:</strong> Iterasi debugging kode ESP8266 dan kalibrasi sensor load cell HX711 terhadap getaran.<br>
+                        <strong>What:</strong> Akurasi distribusi makanan 98% dengan daya yang dioptimalkan (WIFI_LIGHT_SLEEP).
+                    </p>
+                    <div class="card-divider"></div>
+                    <a href="https://github.com/dhiosyh/IoT-Based-Smart-Auto-Pet-Feeder" target="_blank" rel="noopener noreferrer" class="gh-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 5: Mobile Classroom Sign Recognition -->
+            <article class="project-card">
+                <div class="card-thumb">
+                    <div class="card-thumb-overlay"></div>
+                    <img src="comvis.png" alt="Mobile classroom sign recognition" loading="lazy" />
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="proj-badge">Android</span>
+                        <span class="proj-badge">ML</span>
+                    </div>
+                    <h2 class="font-headline-lg-mobile text-on-surface" style="font-size:1rem;line-height:1.3;">
+                        Mobile Classroom Sign Recognition</h2>
+                    <p class="card-story flex-1">
+                        <strong>Why:</strong> Membantu mobilitas pengguna menerjemahkan rambu fisik menjadi informasi digital secara instan.<br>
+                        <strong>How:</strong> Menyatukan UX seluler dengan ML via pra-pemrosesan OpenCV dan EfficientNet.<br>
+                        <strong>What:</strong> Menghasilkan aplikasi native dengan inferensi on-device mulus di bawah 500ms.
+                    </p>
+                    <div class="card-divider"></div>
+                    <a href="https://github.com/dhiosyh/BoardDetection_MobileAPP" target="_blank" rel="noopener noreferrer" class="gh-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 6: Autonomous Self-Balancing Robot -->
+            <article class="project-card">
+                <div class="card-thumb">
+                    <div class="card-thumb-overlay"></div>
+                    <img src="robot-balancing.jpg" alt="Self-balancing robot" loading="lazy" />
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="proj-badge">Robotics</span>
+                        <span class="proj-badge">PID</span>
+                    </div>
+                    <h2 class="font-headline-lg-mobile text-on-surface" style="font-size:1rem;line-height:1.3;">
+                        Autonomous Self-Balancing Robot</h2>
+                    <p class="card-story flex-1">
+                        <strong>Why:</strong> Menantang integrasi hardware-software untuk menjaga sistem fisik yang tidak stabil agar tetap tegak.<br>
+                        <strong>How:</strong> Bereksperimen dengan algoritma PID dan fusi sensor IMU melalui penyesuaian feedback loops.<br>
+                        <strong>What:</strong> Mencapai kontrol motorik presisi tinggi dengan error steady-state hanya 0.44°.
+                    </p>
+                    <div class="card-divider"></div>
+                    <a href="https://github.com/dhiosyh/Autonomous-Self-Balancing-Robot" target="_blank" rel="noopener noreferrer" class="gh-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card 7: Virtual Laboratory for Laser Cutting -->
+            <article class="project-card">
+                <div class="card-thumb">
+                    <div class="card-thumb-overlay"></div>
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&auto=format&fit=crop&q=80"
+                         alt="AI simulation visualization" loading="lazy" />
+                </div>
+                <div class="p-5 flex flex-col flex-1 gap-3">
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="proj-badge">AI</span>
+                        <span class="proj-badge">Python</span>
+                    </div>
+                    <h2 class="font-headline-lg-mobile text-on-surface" style="font-size:1rem;line-height:1.3;">
+                        Virtual Laboratory for Laser Cutting</h2>
+                    <p class="card-story flex-1">
+                        <strong>Why:</strong> Kebutuhan mengurangi limbah material dan biaya uji fisik pada fabrikasi industri.<br>
+                        <strong>How:</strong> Membangun platform simulasi prediktif berbasis AI menggunakan Ridge Regression.<br>
+                        <strong>What:</strong> Prediksi akurat (R² 0.92) yang memproyeksikan pengurangan limbah material sebesar 15%.
+                    </p>
+                    <div class="card-divider"></div>
+                    <a href="https://github.com/dhiosyh" target="_blank" rel="noopener noreferrer" class="gh-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.36.31.678.921.678 1.856 0 1.34-.012 2.42-.012 2.75 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Back to Home -->
+        <div class="flex justify-center mt-20 fade-up delay-200">
+            <a href="index.html"
+               class="inline-flex items-center gap-2 font-label-mono text-label-mono text-on-surface-variant hover:text-primary border border-outline-variant/40 hover:border-primary/40 px-8 py-4 rounded transition-all duration-300">
+                <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span>
+                Back to Home
+            </a>
+        </div>
+
+    </main>
+
+    <!-- ── FOOTER ────────────────────────────────────────── -->
+    <footer class="border-t border-outline-variant/10 mt-16 py-8 text-center">
+        <span class="font-label-mono text-label-mono text-outline-variant text-[11px]">
+            © 2024 Dhio Rahmansyah. Built for the future.
+        </span>
+    </footer>
+
+</body>
+</html>
