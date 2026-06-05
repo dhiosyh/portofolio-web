@@ -288,11 +288,31 @@
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
-    
-    /* Mencegah elemen terpotong di tengah halaman */
-    .card, .project-card, .skills-card, section {
+
+    /* 1. Kunci seluruh blok section agar tidak terpotong */
+    section, .about-section, .skills-section, .experience-section {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Mencegah kartu terpotong di tengah halaman */
+    .card, .project-card, .skills-card, .glass-panel {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* 2. Paksa heading selalu menempel dengan elemen setelahnya */
+    h1, h2, h3, h4, h5, h6, .section-title, .section-heading {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* 3. Paragraf tidak terpotong secara canggung */
+    p, .description {
+        orphans: 3;
+        widows: 3;
     }
 
     /* Menyembunyikan elemen web interaktif di PDF */
